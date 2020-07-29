@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,10 +33,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void randomBtnClicked(View view){
-        String item = db_helper.getRandomItem();
-        randItemTV.setText(item);
+        try{
+            String item = db_helper.getRandomItem();
+            randItemTV.setText(item);
+        }
+        catch(Exception ex){
+            toastMessage("Something went wrong!\nMake sure there are items to pick.");
+
+        }
     }
-
-
+    private void toastMessage(String message){
+        Toast.makeText(this,message,Toast.LENGTH_SHORT).show();
+    }
 
 }
